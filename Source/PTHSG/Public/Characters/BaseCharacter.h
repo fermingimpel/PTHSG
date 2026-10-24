@@ -23,6 +23,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Settings")
 	class UPlayerInputDataAsset* PlayerInputDataAsset;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class UInteractionComponent* InteractionComponent;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	float BaseMovementSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
@@ -40,8 +43,10 @@ protected:
 	void OnRunPressed();
 	UFUNCTION()
 	void OnRunReleased();
+	UFUNCTION()
+	void OnInteractPressed();
 	
-	
+
 public:	
 	ABaseCharacter();
 

@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
+#include "Components/InteractionComponent.h"
 #include "DataAssets/PlayerInputDataAsset.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -13,6 +14,7 @@ ABaseCharacter::ABaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
 }
 
 void ABaseCharacter::BeginPlay()
@@ -64,6 +66,14 @@ void ABaseCharacter::OnRunReleased()
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
+void ABaseCharacter::OnInteractPressed()
+{
+	if (IsValid(InteractionComponent))
+	{
+		InteractionComponent->TryInteract();
+	}
+}
+
 void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -89,13 +99,21 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		return;
 	}
 
-	EIC->BindAction(PlayerInputDataAsset->Move, ETriggerEvent::Triggered, this, &ABaseCharacter::OnMovePressed);
+	if (PlayerInputDataAsset->Move)
+		EIC->BindAction(PlayerInputDataAsset->Move, ETriggerEvent::Triggered, this, &ABaseCharacter::OnMovePressed);
 	
-	EIC->BindAction(PlayerInputDataAsset->Look, ETriggerEvent::Triggered, this, &ABaseCharacter::OnLookPressed);
+	if (PlayerInputDataAsset->Look)
+		EIC->BindAction(PlayerInputDataAsset->Look, ETriggerEvent::Triggered, this, &ABaseCharacter::OnLookPressed);
 	
-	EIC->BindAction(PlayerInputDataAsset->Jump, ETriggerEvent::Started, this, &ABaseCharacter::OnJumpPressed);
+	if (PlayerInputDataAsset->Jump)
+		EIC->BindAction(PlayerInputDataAsset->Jump, ETriggerEvent::Started, this, &ABaseCharacter::OnJumpPressed);
 	
-	EIC->BindAction(PlayerInputDataAsset->Run, ETriggerEvent::Started, this, &ABaseCharacter::OnRunPressed);
-	EIC->BindAction(PlayerInputDataAsset->Run, ETriggerEvent::Completed, this, &ABaseCharacter::OnRunReleased);
+	if (PlayerInputDataAsset->Run)
+	{
+		EIC->BindAction(PlayerInputDataAsset->Run, ETriggerEvent::Started, this, &ABaseCharacter::OnRunPressed);
+		EIC->BindAction(PlayerInputDataAsset->Run, ETriggerEvent::Completed, this, &ABaseCharacter::OnRunReleased);
+	}
+	
+	if (PlayerInputDataAsset->Interact)
+		EIC->BindAction(PlayerInputDataAsset->Interact, ETriggerEvent::Started, this, &ABaseCharacter::OnInteractPressed);
 }
-

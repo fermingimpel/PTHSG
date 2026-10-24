@@ -24,4 +24,6 @@ public:
 	class UInputAction* Jump;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Inputs")
 	class UInputAction* Run;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Inputs")
+	class UInputAction* Interact;
 };
