@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+struct FInputActionValue;
+
 UCLASS()
 class PTHSG_API ABaseCharacter : public ACharacter
 {
@@ -14,11 +16,34 @@ class PTHSG_API ABaseCharacter : public ACharacter
 private:
 
 protected:
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Settings")
+	class UInputMappingContext* DefaultInputMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Settings")
+	class UPlayerInputDataAsset* PlayerInputDataAsset;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float BaseMovementSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float RunningMovementSpeed;
+	
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	void OnMovePressed(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnLookPressed(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnJumpPressed();
+	UFUNCTION()
+	void OnRunPressed();
+	UFUNCTION()
+	void OnRunReleased();
+	
+	
 public:	
 	ABaseCharacter();
-	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
