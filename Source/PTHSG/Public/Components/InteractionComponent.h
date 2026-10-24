@@ -16,10 +16,10 @@ private:
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta = (ClampMin = "0.0"))
-	float InteractionDistance = 200.f;
+	float InteractionDistance = 200.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction", meta = (ClampMin = "0.0"))
-	float TraceRadius = 30.f;
+	float TraceRadius = 30.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction")
 	TEnumAsByte<ETraceTypeQuery> TraceChannel;

@@ -30,7 +30,7 @@ void ABaseCharacter::OnMovePressed(const FInputActionValue& Value)
 	
 	if (IsValid(Controller))
 	{
-		const FRotator YawRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
+		const FRotator YawRotation(0.0f, Controller->GetControlRotation().Yaw, 0.0f);
 
 		const FVector ForwardVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		const FVector RightVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);

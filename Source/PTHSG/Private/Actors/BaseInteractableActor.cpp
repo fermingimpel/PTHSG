@@ -2,6 +2,8 @@
 
 
 #include "Actors/BaseInteractableActor.h"
+#include "Components/StaticMeshComponent.h"
+#include "Spawners/BaseActorSpawner.h"
 
 ABaseInteractableActor::ABaseInteractableActor()
 {
@@ -16,7 +18,14 @@ ABaseInteractableActor::ABaseInteractableActor()
 
 void ABaseInteractableActor::Interact_Implementation(AActor* Interactor)
 {
-	UE_LOG(LogTemp,Warning,TEXT("AAAAAAAAAAAAA"));
+	if (!IsValid(Spawner))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s has no Spawner assigned."), *GetName());
+		return;
+	}
+
+	const int SpawnAmount = FMath::RandRange(MinSpawnAmount, MaxSpawnAmount);
+	Spawner->SpawnActors(SpawnAmount);
 }
 
 void ABaseInteractableActor::BeginPlay()

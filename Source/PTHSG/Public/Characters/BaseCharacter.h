@@ -27,9 +27,9 @@ protected:
 	class UInteractionComponent* InteractionComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
-	float BaseMovementSpeed;
+	float BaseMovementSpeed = 600.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
-	float RunningMovementSpeed;
+	float RunningMovementSpeed = 1000.0f;
 	
 	virtual void BeginPlay() override;
 
