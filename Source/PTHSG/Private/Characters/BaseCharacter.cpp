@@ -17,6 +17,7 @@ ABaseCharacter::ABaseCharacter()
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>(TEXT("InteractionComponent"));
 }
 
+// starts walking at the base speed
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -24,6 +25,7 @@ void ABaseCharacter::BeginPlay()
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
+// only the camera yaw is used so looking up or down doesn't change the speed
 void ABaseCharacter::OnMovePressed(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -40,6 +42,7 @@ void ABaseCharacter::OnMovePressed(const FInputActionValue& Value)
 	}
 }
 
+// the mouse rotates the controller and the camera follows it
 void ABaseCharacter::OnLookPressed(const FInputActionValue& Value)
 {
 	FVector2D LookVector = Value.Get<FVector2D>();
@@ -56,6 +59,7 @@ void ABaseCharacter::OnJumpPressed()
 	Jump();
 }
 
+// running is just a higher max speed, the blend space does the rest
 void ABaseCharacter::OnRunPressed()
 {
 	GetCharacterMovement()->MaxWalkSpeed = RunningMovementSpeed;
@@ -66,11 +70,13 @@ void ABaseCharacter::OnRunReleased()
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
+// the controller calls this when the UI opens because the Shift release never arrives with UI only input
 void ABaseCharacter::ResetMovementSpeed()
 {
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
+// all the interaction logic lives in the component
 void ABaseCharacter::OnInteractPressed()
 {
 	if (IsValid(InteractionComponent))
@@ -79,6 +85,7 @@ void ABaseCharacter::OnInteractPressed()
 	}
 }
 
+// adds the input mapping and binds each action, skipping the ones not assigned in the data asset
 void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -121,4 +128,4 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	
 	if (PlayerInputDataAsset->Interact)
 		EIC->BindAction(PlayerInputDataAsset->Interact, ETriggerEvent::Started, this, &ABaseCharacter::OnInteractPressed);
-}
+}

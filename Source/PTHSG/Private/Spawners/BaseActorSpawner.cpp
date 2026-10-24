@@ -15,6 +15,7 @@ ABaseActorSpawner::ABaseActorSpawner()
 	SetRootComponent(SpawnArea);
 }
 
+// random point inside the box (local space so it works rotated), SetLifeSpan destroys each actor when the time is over
 void ABaseActorSpawner::SpawnActors(int Amount, float LifeSpan)
 {
 	UWorld* World = GetWorld();

@@ -6,6 +6,7 @@
 #include "Components/Button.h"
 #include "Components/SpinBox.h"
 
+// the spin box limits are set here so they don't depend on the Blueprint
 void UActorSpawnerWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
@@ -53,6 +54,7 @@ void UActorSpawnerWidget::HandleCancelClicked()
 	OnWidgetClosed.Broadcast();
 }
 
+// reads both spin boxes and rejects anything outside the limits
 bool UActorSpawnerWidget::TryReadInputs(int& OutAmount, float& OutLifeSpan)
 {
 	if (!IsValid(AmountInput) || !IsValid(LifeSpanInput))

@@ -1,0 +1,30 @@
+Spawner and Locomotion test (UE 5.8, C++)
+
+What it does
+You walk around a room and press E on a cube
+A screen opens where you type how many spheres you want and for how long
+When you press Spawn they appear inside a box in the level and disappear when the time is over
+
+Controls
+WASD move, mouse look, Space jump, hold Shift to run, E interact
+
+Classes
+- ABaseCharacter: movement, jump, run and the interact key
+- UInteractionComponent: traces in front of the character and calls Interact
+- IInteractable: interface with the Interact function
+- ABaseInteractableActor: the cube, it asks the controller to open the screen
+- UActorSpawnerWidget: the two number inputs and the buttons
+- ABasePlayerController: opens and closes the widget and sends the values to the spawner
+- ABaseActorSpawner: the box that spawns the actors
+- ABaseSpawnableActor: the sphere that gets spawned
+- UPlayerInputDataAsset: all the input actions in one place
+
+Blueprints are only used for assets, the animation graph, the widget layout and the map (L_PTHSG)
+
+How it works
+1. Press E, the character tells the interaction component to interact
+2. The component traces forward and calls Interact on whatever implements the interface
+3. The cube asks the controller to open the widget for its spawner
+4. You confirm and the widget sends the amount and the time as an event
+5. The controller catches it, calls SpawnActors on the spawner and closes the screen
+6. The spawner creates the actors at random points in its box and uses SetLifeSpan so they destroy themselves

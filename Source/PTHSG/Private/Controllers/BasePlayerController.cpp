@@ -8,6 +8,7 @@
 #include "Spawners/BaseActorSpawner.h"
 #include "Widgets/ActorSpawnerWidget.h"
 
+// creates the widget only once and switches to UI only input
 void ABasePlayerController::OpenSpawnUI(ABaseActorSpawner* Spawner)
 {
 	if (!IsValid(Spawner) || !SpawnerWidgetClass)
@@ -46,6 +47,7 @@ void ABasePlayerController::OpenSpawnUI(ABaseActorSpawner* Spawner)
 	SetInputMode(FInputModeUIOnly());
 }
 
+// removes the widget and gives the input back to the game
 void ABasePlayerController::CloseSpawnUI()
 {
 	if (IsValid(SpawnerWidget))
@@ -59,6 +61,7 @@ void ABasePlayerController::CloseSpawnUI()
 	SetInputMode(FInputModeGameOnly());
 }
 
+// the widget only sends the values, this is where the spawner gets called
 void ABasePlayerController::HandleSpawnConfirmed(int Amount, float LifeSpan)
 {
 	if (ABaseActorSpawner* Spawner = ActiveSpawner.Get())

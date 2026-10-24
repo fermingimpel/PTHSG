@@ -18,6 +18,7 @@ ABaseInteractableActor::ABaseInteractableActor()
 	StaticMesh->SetupAttachment(Root);
 }
 
+// it doesn't spawn anything, it asks the player controller to open the widget for its spawner
 void ABaseInteractableActor::Interact_Implementation(AActor* Interactor)
 {
 	if (!IsValid(Spawner))

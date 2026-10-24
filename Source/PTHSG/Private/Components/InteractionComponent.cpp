@@ -12,6 +12,7 @@ UInteractionComponent::UInteractionComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+// sphere trace along the owner's forward vector, interacts once with every actor that implements the interface
 bool UInteractionComponent::TryInteract()
 {
 	AActor* Owner = GetOwner();

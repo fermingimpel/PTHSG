@@ -16,6 +16,7 @@ private:
 	UPROPERTY()
 	class UActorSpawnerWidget* SpawnerWidget;
 
+	// weak pointer in case the spawner gets destroyed while the UI is open
 	TWeakObjectPtr<class ABaseActorSpawner> ActiveSpawner;
 
 	UFUNCTION()
