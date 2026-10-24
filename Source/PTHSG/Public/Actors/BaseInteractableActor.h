@@ -24,12 +24,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Spawn")
 	class ABaseActorSpawner* Spawner;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawn", meta = (ClampMin = "1"))
-	int MinSpawnAmount = 5;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawn", meta = (ClampMin = "1"))
-	int MaxSpawnAmount = 15;
-
 	virtual void BeginPlay() override;
 
 public:	

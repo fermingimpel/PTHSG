@@ -3,6 +3,8 @@
 
 #include "Actors/BaseInteractableActor.h"
 #include "Components/StaticMeshComponent.h"
+#include "Controllers/BasePlayerController.h"
+#include "GameFramework/Pawn.h"
 #include "Spawners/BaseActorSpawner.h"
 
 ABaseInteractableActor::ABaseInteractableActor()
@@ -24,8 +26,19 @@ void ABaseInteractableActor::Interact_Implementation(AActor* Interactor)
 		return;
 	}
 
-	const int SpawnAmount = FMath::RandRange(MinSpawnAmount, MaxSpawnAmount);
-	Spawner->SpawnActors(SpawnAmount);
+	const APawn* InteractorPawn = Cast<APawn>(Interactor);
+
+	if (!IsValid(InteractorPawn))
+	{
+		return;
+	}
+
+	ABasePlayerController* PlayerController = Cast<ABasePlayerController>(InteractorPawn->GetController());
+
+	if (IsValid(PlayerController))
+	{
+		PlayerController->OpenSpawnUI(Spawner);
+	}
 }
 
 void ABaseInteractableActor::BeginPlay()

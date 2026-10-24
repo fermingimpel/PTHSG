@@ -21,15 +21,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner")
 	TSubclassOf<class ABaseSpawnableActor> SpawnableActorClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner", meta = (ClampMin = "0.1"))
-	float SpawnedActorLifeSpan = 10.0f;
-
 	virtual void BeginPlay() override;
 
 public:
 	ABaseActorSpawner();
 
 	UFUNCTION(BlueprintCallable, Category = "Spawner")
-	void SpawnActors(int Amount);
+	void SpawnActors(int Amount, float LifeSpan);
 
 };

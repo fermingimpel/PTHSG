@@ -21,7 +21,7 @@ void ABaseActorSpawner::BeginPlay()
 
 }
 
-void ABaseActorSpawner::SpawnActors(int Amount)
+void ABaseActorSpawner::SpawnActors(int Amount, float LifeSpan)
 {
 	UWorld* World = GetWorld();
 
@@ -31,7 +31,7 @@ void ABaseActorSpawner::SpawnActors(int Amount)
 		return;
 	}
 
-	if (Amount <= 0)
+	if (Amount <= 0 || LifeSpan <= 0.0f)
 	{
 		return;
 	}
@@ -52,7 +52,7 @@ void ABaseActorSpawner::SpawnActors(int Amount)
 
 		if (IsValid(SpawnedActor))
 		{
-			SpawnedActor->SetLifeSpan(SpawnedActorLifeSpan);
+			SpawnedActor->SetLifeSpan(LifeSpan);
 		}
 	}
 }
