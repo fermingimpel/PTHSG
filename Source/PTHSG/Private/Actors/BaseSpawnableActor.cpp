@@ -14,8 +14,3 @@ ABaseSpawnableActor::ABaseSpawnableActor()
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void ABaseSpawnableActor::BeginPlay()
-{
-	Super::BeginPlay();
-
-}

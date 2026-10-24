@@ -21,8 +21,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner")
 	TSubclassOf<class ABaseSpawnableActor> SpawnableActorClass;
 
-	virtual void BeginPlay() override;
-
 public:
 	ABaseActorSpawner();
 

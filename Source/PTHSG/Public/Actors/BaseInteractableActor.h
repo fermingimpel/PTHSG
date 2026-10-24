@@ -24,8 +24,6 @@ protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Spawn")
 	class ABaseActorSpawner* Spawner;
 
-	virtual void BeginPlay() override;
-
 public:	
 	ABaseInteractableActor();
 	

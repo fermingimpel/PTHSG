@@ -15,12 +15,6 @@ ABaseActorSpawner::ABaseActorSpawner()
 	SetRootComponent(SpawnArea);
 }
 
-void ABaseActorSpawner::BeginPlay()
-{
-	Super::BeginPlay();
-
-}
-
 void ABaseActorSpawner::SpawnActors(int Amount, float LifeSpan)
 {
 	UWorld* World = GetWorld();

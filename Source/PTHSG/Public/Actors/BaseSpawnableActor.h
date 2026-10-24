@@ -18,8 +18,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UStaticMeshComponent* StaticMesh;
 
-	virtual void BeginPlay() override;
-
 public:
 	ABaseSpawnableActor();
 

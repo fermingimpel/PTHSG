@@ -41,8 +41,3 @@ void ABaseInteractableActor::Interact_Implementation(AActor* Interactor)
 	}
 }
 
-void ABaseInteractableActor::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
