@@ -52,4 +52,6 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void ResetMovementSpeed();
+
 };

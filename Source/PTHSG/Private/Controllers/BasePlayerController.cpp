@@ -4,6 +4,7 @@
 #include "Controllers/BasePlayerController.h"
 
 #include "Blueprint/UserWidget.h"
+#include "Characters/BaseCharacter.h"
 #include "Spawners/BaseActorSpawner.h"
 #include "Widgets/ActorSpawnerWidget.h"
 
@@ -35,6 +36,11 @@ void ABasePlayerController::OpenSpawnUI(ABaseActorSpawner* Spawner)
 
 	ActiveSpawner = Spawner;
 	SpawnerWidget->AddToViewport();
+
+	if (ABaseCharacter* ControlledCharacter = Cast<ABaseCharacter>(GetPawn()))
+	{
+		ControlledCharacter->ResetMovementSpeed();
+	}
 
 	SetShowMouseCursor(true);
 	SetInputMode(FInputModeUIOnly());

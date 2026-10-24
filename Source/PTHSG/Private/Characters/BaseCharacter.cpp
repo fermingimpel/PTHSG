@@ -66,6 +66,11 @@ void ABaseCharacter::OnRunReleased()
 	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
 }
 
+void ABaseCharacter::ResetMovementSpeed()
+{
+	GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+}
+
 void ABaseCharacter::OnInteractPressed()
 {
 	if (IsValid(InteractionComponent))
